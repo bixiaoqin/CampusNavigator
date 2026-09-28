@@ -1,0 +1,69 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Microsoft YaHei,SimHei,sans-serif">
+  <defs>
+    <style>
+      .actor { fill: #1565C0; }
+      .uc { fill: #E3F2FD; stroke: #1565C0; stroke-width: 1.5; }
+      .uc-text { font-size: 12px; text-anchor: middle; fill: #263238; }
+      .sys-border { fill: none; stroke: #90A4AE; stroke-width: 2; stroke-dasharray: 8,4; }
+      .title { font-size: 18px; font-weight: bold; text-anchor: middle; fill: #263238; }
+    </style>
+  </defs>
+  <rect width="1200" height="800" fill="#FAFAFA"/>
+  <text x="600" y="30" class="title">CampusNavigator 用例图</text>
+
+  <!-- 系统边界 -->
+  <rect x="280" y="60" width="640" height="700" class="sys-border" rx="10"/>
+  <text x="600" y="50" font-size="13" font-weight="bold" fill="#546E7A" text-anchor="middle">校园探索与智能导航模拟系统</text>
+
+  <!-- 演员：普通用户 -->
+  <g transform="translate(120, 300)">
+    <circle cx="0" cy="0" r="18" class="actor"/>
+    <line x1="0" y1="18" x2="0" y2="55" stroke="#1565C0" stroke-width="3"/>
+    <line x1="-20" y1="35" x2="20" y2="35" stroke="#1565C0" stroke-width="3"/>
+    <line x1="0" y1="55" x2="-15" y2="80" stroke="#1565C0" stroke-width="3"/>
+    <line x1="0" y1="55" x2="15" y2="80" stroke="#1565C0" stroke-width="3"/>
+    <text x="0" y="105" font-size="14" font-weight="bold" text-anchor="middle" fill="#1565C0">普通用户</text>
+    <text x="0" y="122" font-size="11" text-anchor="middle" fill="#78909C">(新生/访客)</text>
+  </g>
+
+  <!-- 演员：管理员 -->
+  <g transform="translate(1080, 400)">
+    <circle cx="0" cy="0" r="18" fill="#E65100"/>
+    <line x1="0" y1="18" x2="0" y2="55" stroke="#E65100" stroke-width="3"/>
+    <line x1="-20" y1="35" x2="20" y2="35" stroke="#E65100" stroke-width="3"/>
+    <line x1="0" y1="55" x2="-15" y2="80" stroke="#E65100" stroke-width="3"/>
+    <line x1="0" y1="55" x2="15" y2="80" stroke="#E65100" stroke-width="3"/>
+    <text x="0" y="105" font-size="14" font-weight="bold" text-anchor="middle" fill="#E65100">管理员</text>
+  </g>
+
+  <!-- 用例 -->
+  <ellipse cx="600" cy="100" rx="110" ry="28" class="uc"/><text x="600" y="105" class="uc-text">浏览校园地图</text>
+  <ellipse cx="600" cy="165" rx="110" ry="28" class="uc"/><text x="600" y="170" class="uc-text">搜索建筑</text>
+  <ellipse cx="600" cy="230" rx="110" ry="28" class="uc"/><text x="600" y="235" class="uc-text">查看建筑信息</text>
+  <ellipse cx="600" cy="295" rx="110" ry="28" class="uc"/><text x="600" y="300" class="uc-text">规划导航路径</text>
+  <ellipse cx="600" cy="360" rx="110" ry="28" class="uc"/><text x="600" y="365" class="uc-text">WASD角色漫游</text>
+  <ellipse cx="600" cy="425" rx="110" ry="28" class="uc"/><text x="600" y="430" class="uc-text">自动路径导航</text>
+  <ellipse cx="600" cy="490" rx="110" ry="28" class="uc"/><text x="600" y="495" class="uc-text">切换昼夜/天气</text>
+  <ellipse cx="600" cy="555" rx="110" ry="28" class="uc"/><text x="600" y="560" class="uc-text">NPC对话交互</text>
+  <ellipse cx="600" cy="620" rx="110" ry="28" class="uc"/><text x="600" y="625" class="uc-text">新生引导模式</text>
+  <ellipse cx="600" cy="685" rx="110" ry="28" class="uc"/><text x="600" y="690" class="uc-text">访客导览模式</text>
+  <ellipse cx="600" cy="735" rx="110" ry="28" class="uc" stroke="#E65100"/><text x="600" y="740" class="uc-text" fill="#E65100">管理建筑/道路(CRUD)</text>
+
+  <!-- 连线：普通用户 -->
+  <line x1="140" y1="300" x2="490" y2="100" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="165" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="230" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="295" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="360" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="425" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="490" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="555" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="620" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="140" y1="300" x2="490" y2="685" stroke="#90A4AE" stroke-width="1"/>
+
+  <!-- 连线：管理员 -->
+  <line x1="1060" y1="400" x2="710" y2="735" stroke="#90A4AE" stroke-width="1"/>
+  <line x1="1060" y1="400" x2="710" y2="100" stroke="#90A4AE" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="850" y="120" font-size="10" fill="#78909C">«include»</text>
+</svg>

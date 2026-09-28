@@ -1,0 +1,122 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Microsoft YaHei,SimHei,sans-serif">
+  <defs>
+    <style>
+      .node { stroke: #37474F; stroke-width: 2; }
+      .node-start { fill: #4CAF50; }
+      .node-visited { fill: #FFD54F; }
+      .node-current { fill: #FF7043; stroke: #D32F2F; stroke-width: 3; }
+      .node-end { fill: #F44336; }
+      .node-unvisited { fill: #FFFFFF; }
+      .edge { stroke: #BDBDBD; stroke-width: 2; }
+      .edge-relaxed { stroke: #FF7043; stroke-width: 3; }
+      .edge-path { stroke: #4CAF50; stroke-width: 4; }
+      .label { font-size: 12px; text-anchor: middle; fill: #263238; }
+      .dist { font-size: 11px; text-anchor: middle; fill: #1565C0; font-weight: bold; }
+      .title { font-size: 18px; font-weight: bold; text-anchor: middle; fill: #263238; }
+      .step { font-size: 14px; fill: #37474F; }
+    </style>
+  </defs>
+  <rect width="1200" height="800" fill="#FAFAFA"/>
+  <text x="600" y="30" class="title">Dijkstra 最短路径算法执行过程示例</text>
+  <text x="600" y="52" font-size="13" text-anchor="middle" fill="#546E7A">从 北门(0) 到 宿舍16-20(42) 的最短路径计算</text>
+
+  <!-- 步骤1：初始化 -->
+  <text x="80" y="90" class="step" font-weight="bold">步骤1：初始化</text>
+  <text x="80" y="110" class="step" font-size="12">dist[0]=0, 其余=∞, 优先队列入(0, 起点)</text>
+
+  <!-- 图节点位置 -->
+  <!-- 北门 -->
+  <circle cx="150" cy="180" r="22" class="node node-start"/>
+  <text x="150" y="185" class="label" fill="white" font-weight="bold">0</text>
+  <text x="150" y="155" class="label" font-size="10">北门</text>
+  <text x="150" y="215" class="dist">dist=0</text>
+
+  <!-- 教学楼1 -->
+  <circle cx="350" cy="180" r="22" class="node node-visited"/>
+  <text x="350" y="185" class="label" fill="#263238" font-weight="bold">7</text>
+  <text x="350" y="155" class="label" font-size="10">教学楼1</text>
+  <text x="350" y="215" class="dist">dist=80</text>
+
+  <!-- 材料学院 -->
+  <circle cx="550" cy="180" r="22" class="node node-visited"/>
+  <text x="550" y="185" class="label" fill="#263238" font-weight="bold">11</text>
+  <text x="550" y="155" class="label" font-size="10">材料学院</text>
+  <text x="550" y="215" class="dist">dist=200</text>
+
+  <!-- 环安学院 -->
+  <circle cx="750" cy="180" r="22" class="node node-visited"/>
+  <text x="750" y="185" class="label" fill="#263238" font-weight="bold">17</text>
+  <text x="750" y="155" class="label" font-size="10">环安学院</text>
+  <text x="750" y="215" class="dist">dist=330</text>
+
+  <!-- 超市 -->
+  <circle cx="950" cy="280" r="22" class="node node-visited"/>
+  <text x="950" y="285" class="label" fill="#263238" font-weight="bold">24</text>
+  <text x="950" y="255" class="label" font-size="10">超市</text>
+  <text x="950" y="315" class="dist">dist=440</text>
+
+  <!-- 宿舍16-20 -->
+  <circle cx="950" cy="450" r="22" class="node node-end"/>
+  <text x="950" y="455" class="label" fill="white" font-weight="bold">42</text>
+  <text x="950" y="425" class="label" font-size="10">宿舍16-20</text>
+  <text x="950" y="485" class="dist">dist=560</text>
+
+  <!-- 其他节点 -->
+  <circle cx="350" cy="350" r="18" class="node node-unvisited"/>
+  <text x="350" y="355" class="label" font-size="10">10</text>
+  <text x="350" y="380" class="dist" font-size="9">dist=190</text>
+
+  <circle cx="550" cy="350" r="18" class="node node-unvisited"/>
+  <text x="550" y="355" class="label" font-size="10">16</text>
+  <text x="550" y="380" class="dist" font-size="9">dist=320</text>
+
+  <circle cx="750" cy="350" r="18" class="node node-unvisited"/>
+  <text x="750" y="355" class="label" font-size="10">18</text>
+  <text x="750" y="380" class="dist" font-size="9">dist=460</text>
+
+  <!-- 边 -->
+  <line x1="172" y1="180" x2="328" y2="180" class="edge-path"/>
+  <text x="250" y="172" font-size="10" fill="#4CAF50" text-anchor="middle">80</text>
+
+  <line x1="372" y1="180" x2="528" y2="180" class="edge-path"/>
+  <text x="450" y="172" font-size="10" fill="#4CAF50" text-anchor="middle">120</text>
+
+  <line x1="572" y1="180" x2="728" y2="180" class="edge-path"/>
+  <text x="650" y="172" font-size="10" fill="#4CAF50" text-anchor="middle">130</text>
+
+  <line x1="750" y1="202" x2="950" y2="258" class="edge-path"/>
+  <text x="850" y="225" font-size="10" fill="#4CAF50" text-anchor="middle">110</text>
+
+  <line x1="950" y1="302" x2="950" y2="428" class="edge-path"/>
+  <text x="965" y="365" font-size="10" fill="#4CAF50">120</text>
+
+  <!-- 非路径边 -->
+  <line x1="350" y1="202" x2="350" y2="332" class="edge"/>
+  <line x1="550" y1="202" x2="550" y2="332" class="edge"/>
+  <line x1="750" y1="202" x2="750" y2="332" class="edge"/>
+  <line x1="368" y1="350" x2="532" y2="350" class="edge"/>
+  <line x1="568" y1="350" x2="732" y2="350" class="edge"/>
+
+  <!-- 步骤说明 -->
+  <rect x="80" y="550" width="1040" height="220" fill="white" stroke="#BDBDBD" stroke-width="1" rx="8"/>
+  <text x="100" y="580" class="step" font-weight="bold">算法执行步骤：</text>
+
+  <text x="100" y="608" class="step" font-size="12">① 初始化：dist[0]=0, dist[其他]=∞, 优先队列 pq={(0, 北门)}</text>
+  <text x="100" y="632" class="step" font-size="12">② 出队 (0, 北门)，松弛邻居：dist[7]=80, dist[7]入队。pq={(80, 教学楼1)}</text>
+  <text x="100" y="656" class="step" font-size="12">③ 出队 (80, 教学楼1)，松弛邻居：dist[11]=200, dist[10]=190。pq={(190, 理学院), (200, 材料学院)}</text>
+  <text x="100" y="680" class="step" font-size="12">④ 出队 (190, 理学院)，松弛邻居：dist[16]=320, 但 dist[11]已更优(200)，跳过</text>
+  <text x="100" y="704" class="step" font-size="12">⑤ 出队 (200, 材料学院)，松弛邻居：dist[17]=330, dist[16]已更优(320)</text>
+  <text x="100" y="728" class="step" font-size="12">⑥ 出队 (330, 环安学院)，松弛邻居：dist[24]=440, dist[18]=460</text>
+  <text x="100" y="752" class="step" font-size="12">⑦ 出队 (440, 超市)，松弛邻居：dist[42]=560 → 到达终点！prev[42]=24, 回溯路径：0→7→11→17→24→42</text>
+
+  <!-- 图例 -->
+  <rect x="800" y="90" width="320" height="100" fill="white" stroke="#BDBDBD" rx="6"/>
+  <text x="820" y="112" font-size="12" font-weight="bold" fill="#37474F">图例：</text>
+  <circle cx="830" cy="132" r="8" class="node node-start"/><text x="850" y="136" font-size="11" fill="#37474F">起点 (dist=0)</text>
+  <circle cx="950" cy="132" r="8" class="node node-visited"/><text x="970" y="136" font-size="11" fill="#37474F">已确定</text>
+  <circle cx="1050" cy="132" r="8" class="node node-unvisited"/><text x="1070" y="136" font-size="11" fill="#37474F">未访问</text>
+  <line x1="822" y1="155" x2="840" y2="155" class="edge-path"/><text x="850" y="159" font-size="11" fill="#37474F">最短路径</text>
+  <line x1="942" y1="155" x2="960" y2="155" class="edge"/><text x="970" y="159" font-size="11" fill="#37474F">普通边</text>
+  <circle cx="1050" cy="155" r="8" class="node node-end"/><text x="1070" y="159" font-size="11" fill="#37474F">终点</text>
+</svg>

@@ -1,0 +1,403 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1400" font-family="Microsoft YaHei,SimHei,sans-serif">
+  <defs>
+    <!-- 继承箭头（空心三角） -->
+    <marker id="inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M0,0 L11,6 L0,12 Z" fill="white" stroke="#37474F" stroke-width="1.5"/>
+    </marker>
+    <!-- 组合（实心菱形） -->
+    <marker id="compose" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M0,6 L6,0 L12,6 L6,12 Z" fill="#37474F" stroke="#37474F" stroke-width="1"/>
+    </marker>
+    <!-- 聚合（空心菱形） -->
+    <marker id="aggregate" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M0,6 L6,0 L12,6 L6,12 Z" fill="white" stroke="#37474F" stroke-width="1"/>
+    </marker>
+    <!-- 关联（实线箭头） -->
+    <marker id="assoc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0,0 L9,5 L0,10" fill="none" stroke="#37474F" stroke-width="1.5"/>
+    </marker>
+    <!-- 依赖（虚线箭头） -->
+    <marker id="depend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0,0 L9,5 L0,10" fill="none" stroke="#78909C" stroke-width="1.5"/>
+    </marker>
+    <style>
+      .cls-box { fill: #FFFFFF; stroke: #37474F; stroke-width: 1.5; }
+      .cls-name { font-size: 15px; font-weight: bold; text-anchor: middle; }
+      .cls-attr { font-size: 11px; }
+      .cls-method { font-size: 11px; }
+      .cls-sep { stroke: #37474F; stroke-width: 1; }
+      .layer-label { font-size: 13px; font-weight: bold; fill: #78909C; }
+      .qt-box { fill: #E3F2FD; stroke: #1565C0; stroke-width: 1.5; }
+      .qt-name { font-size: 14px; font-weight: bold; text-anchor: middle; fill: #1565C0; }
+      .rel-label { font-size: 10px; fill: #546E7A; }
+      .legend-box { fill: #FAFAFA; stroke: #BDBDBD; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1800" height="1400" fill="#FAFAFA"/>
+
+  <!-- 标题 -->
+  <text x="900" y="30" font-size="20" font-weight="bold" text-anchor="middle" fill="#263238">CampusNavigator 系统 UML 类图</text>
+
+  <!-- 层标签 -->
+  <text x="200" y="70" class="layer-label">视图层 (View)</text>
+  <text x="900" y="70" class="layer-label">数据层 (Data)</text>
+  <text x="1400" y="70" class="layer-label">模型层 (Model)</text>
+
+  <!-- ============ Qt 基类（顶部）============ -->
+  <rect x="60" y="85" width="180" height="50" class="qt-box" rx="4"/>
+  <text x="150" y="108" class="qt-name">QMainWindow</text>
+  <text x="150" y="125" class="cls-attr" text-anchor="middle" fill="#1565C0">«Qt 基类»</text>
+
+  <rect x="300" y="85" width="180" height="50" class="qt-box" rx="4"/>
+  <text x="390" y="108" class="qt-name">QGraphicsScene</text>
+  <text x="390" y="125" class="cls-attr" text-anchor="middle" fill="#1565C0">«Qt 基类»</text>
+
+  <rect x="540" y="85" width="180" height="50" class="qt-box" rx="4"/>
+  <text x="630" y="108" class="qt-name">QGraphicsObject</text>
+  <text x="630" y="125" class="cls-attr" text-anchor="middle" fill="#1565C0">«Qt 基类»</text>
+
+  <rect x="780" y="85" width="160" height="50" class="qt-box" rx="4"/>
+  <text x="860" y="108" class="qt-name">QDialog</text>
+  <text x="860" y="125" class="cls-attr" text-anchor="middle" fill="#1565C0">«Qt 基类»</text>
+
+  <rect x="980" y="85" width="180" height="50" class="qt-box" rx="4"/>
+  <text x="1070" y="108" class="qt-name">QGraphicsItem</text>
+  <text x="1070" y="125" class="cls-attr" text-anchor="middle" fill="#1565C0">«Qt 基类»</text>
+
+  <!-- ============ MainWindow ============ -->
+  <rect x="40" y="200" width="320" height="320" class="cls-box" rx="4"/>
+  <rect x="40" y="200" width="320" height="28" fill="#1565C0" rx="4"/>
+  <rect x="40" y="220" width="320" height="8" fill="#1565C0"/>
+  <text x="200" y="219" class="cls-name" fill="white">MainWindow</text>
+  <text x="200" y="244" class="cls-attr" text-anchor="middle" fill="#78909C">«controller, Q_OBJECT»</text>
+  <line x1="40" y1="252" x2="360" y2="252" class="cls-sep"/>
+  <text x="50" y="268" class="cls-attr">- mapView_: QGraphicsView*</text>
+  <text x="50" y="284" class="cls-attr">- miniMapView_: QGraphicsView*</text>
+  <text x="50" y="300" class="cls-attr">- mapScene_: MapScene*</text>
+  <text x="50" y="316" class="cls-attr">- character_: CharacterItem*</text>
+  <text x="50" y="332" class="cls-attr">- weatherOverlay_: WeatherOverlay*</text>
+  <text x="50" y="348" class="cls-attr">- campus_: Graph</text>
+  <text x="50" y="364" class="cls-attr">- npcs_: vector&lt;NpcItem*&gt;</text>
+  <text x="50" y="380" class="cls-attr">- moveTimer_: QTimer*</text>
+  <text x="50" y="396" class="cls-attr">- navTimer_: QTimer*</text>
+  <text x="50" y="412" class="cls-attr">- appMode_: AppMode</text>
+  <line x1="40" y1="420" x2="360" y2="420" class="cls-sep"/>
+  <text x="50" y="436" class="cls-method">+ setupUI()</text>
+  <text x="50" y="452" class="cls-method">+ initMapData()</text>
+  <text x="50" y="468" class="cls-method">+ onNavigate()</text>
+  <text x="50" y="484" class="cls-method">+ onCharacterTimer()</text>
+  <text x="50" y="500" class="cls-method">+ startAutoNavigate(path)</text>
+  <text x="50" y="516" class="cls-method">+ onToggleDayNight()</text>
+
+  <!-- ============ MapScene ============ -->
+  <rect x="400" y="200" width="260" height="240" class="cls-box" rx="4"/>
+  <rect x="400" y="200" width="260" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="400" y="220" width="260" height="8" fill="#2E7D32"/>
+  <text x="530" y="219" class="cls-name" fill="white">MapScene</text>
+  <text x="530" y="244" class="cls-attr" text-anchor="middle" fill="#78909C">«Q_OBJECT»</text>
+  <line x1="400" y1="252" x2="660" y2="252" class="cls-sep"/>
+  <text x="410" y="268" class="cls-attr">- buildingItems_: QMap&lt;int,BuildingItem*&gt;</text>
+  <text x="410" y="284" class="cls-attr">- roadItems_: QList&lt;RoadItem*&gt;</text>
+  <text x="410" y="300" class="cls-attr">- startPointId_: int</text>
+  <text x="410" y="316" class="cls-attr">- endPointId_: int</text>
+  <line x1="400" y1="324" x2="660" y2="324" class="cls-sep"/>
+  <text x="410" y="340" class="cls-method">+ loadFromGraph(graph: Graph)</text>
+  <text x="410" y="356" class="cls-method">+ highlightPath(path: vector&lt;int&gt;)</text>
+  <text x="410" y="372" class="cls-method">+ clearPathHighlight()</text>
+  <text x="410" y="388" class="cls-method">+ setStartPoint(id: int)</text>
+  <text x="410" y="404" class="cls-method">+ setEndPoint(id: int)</text>
+  <text x="410" y="420" class="cls-method">+ buildingClicked(id: int) «signal»</text>
+
+  <!-- ============ BuildingItem ============ -->
+  <rect x="700" y="200" width="240" height="220" class="cls-box" rx="4"/>
+  <rect x="700" y="200" width="240" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="700" y="220" width="240" height="8" fill="#2E7D32"/>
+  <text x="820" y="219" class="cls-name" fill="white">BuildingItem</text>
+  <line x1="700" y1="228" x2="940" y2="228" class="cls-sep"/>
+  <text x="710" y="244" class="cls-attr">- building_: const Building*</text>
+  <text x="710" y="260" class="cls-attr">- selected_: bool</text>
+  <text x="710" y="276" class="cls-attr">- hovered_: bool</text>
+  <text x="710" y="292" class="cls-attr">- labelAbove_: bool</text>
+  <text x="710" y="308" class="cls-attr">- labelScale_: qreal</text>
+  <line x1="700" y1="316" x2="940" y2="316" class="cls-sep"/>
+  <text x="710" y="332" class="cls-method">+ paint(painter, option, widget)</text>
+  <text x="710" y="348" class="cls-method">+ setSelected(selected: bool)</text>
+  <text x="710" y="364" class="cls-method">+ setLabelScale(scale: qreal)</text>
+  <text x="710" y="380" class="cls-method">+ clicked(id: int) «signal»</text>
+  <text x="710" y="396" class="cls-method">- typeColor(): QColor</text>
+
+  <!-- ============ CharacterItem ============ -->
+  <rect x="700" y="460" width="240" height="200" class="cls-box" rx="4"/>
+  <rect x="700" y="460" width="240" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="700" y="480" width="240" height="8" fill="#2E7D32"/>
+  <text x="820" y="479" class="cls-name" fill="white">CharacterItem</text>
+  <line x1="700" y1="488" x2="940" y2="488" class="cls-sep"/>
+  <text x="710" y="504" class="cls-attr">- direction_: Direction</text>
+  <text x="710" y="520" class="cls-attr">- speed_: double</text>
+  <text x="710" y="536" class="cls-attr">- walking_: bool</text>
+  <text x="710" y="552" class="cls-attr">- walkFrame_: int</text>
+  <line x1="700" y1="560" x2="940" y2="560" class="cls-sep"/>
+  <text x="710" y="576" class="cls-method">+ paint(painter, option, widget)</text>
+  <text x="710" y="592" class="cls-method">+ setDirection(d: Direction)</text>
+  <text x="710" y="608" class="cls-method">+ setWalking(w: bool)</text>
+  <text x="710" y="624" class="cls-method">+ advanceFrame()</text>
+  <text x="710" y="640" class="cls-method">- drawHead/Body/Legs/Arms()</text>
+
+  <!-- ============ NpcItem ============ -->
+  <rect x="980" y="460" width="260" height="220" class="cls-box" rx="4"/>
+  <rect x="980" y="460" width="260" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="980" y="480" width="260" height="8" fill="#2E7D32"/>
+  <text x="1110" y="479" class="cls-name" fill="white">NpcItem</text>
+  <line x1="980" y1="488" x2="1240" y2="488" class="cls-sep"/>
+  <text x="990" y="504" class="cls-attr">- name_: QString</text>
+  <text x="990" y="520" class="cls-attr">- dialog_: QString</text>
+  <text x="990" y="536" class="cls-attr">- outfit_: Outfit</text>
+  <text x="990" y="552" class="cls-attr">- graph_: const Graph*</text>
+  <text x="990" y="568" class="cls-attr">- targetBuildingId_: int</text>
+  <text x="990" y="584" class="cls-attr">- moveState_: MoveState</text>
+  <line x1="980" y1="592" x2="1240" y2="592" class="cls-sep"/>
+  <text x="990" y="608" class="cls-method">+ updateMovement()</text>
+  <text x="990" y="624" class="cls-method">+ setGraph(graph: const Graph*)</text>
+  <text x="990" y="640" class="cls-method">+ clicked(name, dialog) «signal»</text>
+  <text x="990" y="656" class="cls-method">- pickNewTarget()</text>
+
+  <!-- ============ WeatherOverlay ============ -->
+  <rect x="980" y="200" width="200" height="160" class="cls-box" rx="4"/>
+  <rect x="980" y="200" width="200" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="980" y="220" width="200" height="8" fill="#2E7D32"/>
+  <text x="1080" y="219" class="cls-name" fill="white">WeatherOverlay</text>
+  <line x1="980" y1="228" x2="1180" y2="228" class="cls-sep"/>
+  <text x="990" y="244" class="cls-attr">- weather_: WeatherType</text>
+  <text x="990" y="260" class="cls-attr">- particles_: QVector&lt;Particle&gt;</text>
+  <text x="990" y="276" class="cls-attr">- areaW_/areaH_: double</text>
+  <line x1="980" y1="284" x2="1180" y2="284" class="cls-sep"/>
+  <text x="990" y="300" class="cls-method">+ setWeather(type)</text>
+  <text x="990" y="316" class="cls-method">+ setAreaSize(w, h)</text>
+  <text x="990" y="332" class="cls-method">+ advance(phase)</text>
+  <text x="990" y="348" class="cls-method">- initParticles()</text>
+
+  <!-- ============ AdminDialog ============ -->
+  <rect x="1210" y="200" width="250" height="200" class="cls-box" rx="4"/>
+  <rect x="1210" y="200" width="250" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="1210" y="220" width="250" height="8" fill="#2E7D32"/>
+  <text x="1335" y="219" class="cls-name" fill="white">AdminDialog</text>
+  <line x1="1210" y1="228" x2="1460" y2="228" class="cls-sep"/>
+  <text x="1220" y="244" class="cls-attr">- tabWidget_: QTabWidget*</text>
+  <text x="1220" y="260" class="cls-attr">- listWidget_: QListWidget*</text>
+  <text x="1220" y="276" class="cls-attr">- nameEdit_: QLineEdit*</text>
+  <text x="1220" y="292" class="cls-attr">- roadFromCombo_: QComboBox*</text>
+  <line x1="1210" y1="300" x2="1460" y2="300" class="cls-sep"/>
+  <text x="1220" y="316" class="cls-method">+ onAdd() / onUpdate()</text>
+  <text x="1220" y="332" class="cls-method">+ onDelete()</text>
+  <text x="1220" y="348" class="cls-method">+ onAddRoad() / onDeleteRoad()</text>
+  <text x="1220" y="364" class="cls-method">+ onResetDefaults()</text>
+
+  <!-- ============ RoadItem ============ -->
+  <rect x="400" y="480" width="220" height="140" class="cls-box" rx="4"/>
+  <rect x="400" y="480" width="220" height="28" fill="#2E7D32" rx="4"/>
+  <rect x="400" y="500" width="220" height="8" fill="#2E7D32"/>
+  <text x="510" y="499" class="cls-name" fill="white">RoadItem</text>
+  <line x1="400" y1="508" x2="620" y2="508" class="cls-sep"/>
+  <text x="410" y="524" class="cls-attr">- from_: QPointF</text>
+  <text x="410" y="540" class="cls-attr">- to_: QPointF</text>
+  <text x="410" y="556" class="cls-attr">- highlighted_: bool</text>
+  <line x1="400" y1="564" x2="620" y2="564" class="cls-sep"/>
+  <text x="410" y="580" class="cls-method">+ paint(...)</text>
+  <text x="410" y="596" class="cls-method">+ setHighlighted(h: bool)</text>
+
+  <!-- ============ 数据层 ============ -->
+  <!-- DatabaseManager -->
+  <rect x="700" y="720" width="280" height="280" class="cls-box" rx="4"/>
+  <rect x="700" y="720" width="280" height="28" fill="#E65100" rx="4"/>
+  <rect x="700" y="740" width="280" height="8" fill="#E65100"/>
+  <text x="840" y="739" class="cls-name" fill="white">DatabaseManager «singleton»</text>
+  <line x1="700" y1="748" x2="980" y2="748" class="cls-sep"/>
+  <text x="710" y="764" class="cls-attr">- db_: QSqlDatabase</text>
+  <text x="710" y="780" class="cls-attr">- initialized_: bool</text>
+  <line x1="700" y1="788" x2="980" y2="788" class="cls-sep"/>
+  <text x="710" y="804" class="cls-method">+ instance(): DatabaseManager&amp;</text>
+  <text x="710" y="820" class="cls-method">+ init(dbPath: QString): bool</text>
+  <text x="710" y="836" class="cls-method">+ loadAllBuildings(): vector&lt;Building&gt;</text>
+  <text x="710" y="852" class="cls-method">+ addBuilding(b: Building): bool</text>
+  <text x="710" y="868" class="cls-method">+ updateBuilding(b: Building): bool</text>
+  <text x="710" y="884" class="cls-method">+ deleteBuilding(id: int): bool</text>
+  <text x="710" y="900" class="cls-method">+ loadAllRoads(): vector&lt;Road&gt;</text>
+  <text x="710" y="916" class="cls-method">+ addRoad(from, to, w): bool</text>
+  <text x="710" y="932" class="cls-method">+ deleteRoad(from, to): bool</text>
+  <text x="710" y="948" class="cls-method">+ resetToDefaultData(): bool</text>
+  <text x="710" y="964" class="cls-method">+ importPlaceIntroductions(dir)</text>
+
+  <!-- CampusData -->
+  <rect x="1020" y="720" width="240" height="120" class="cls-box" rx="4"/>
+  <rect x="1020" y="720" width="240" height="28" fill="#E65100" rx="4"/>
+  <rect x="1020" y="740" width="240" height="8" fill="#E65100"/>
+  <text x="1140" y="739" class="cls-name" fill="white">CampusData «namespace»</text>
+  <line x1="1020" y1="748" x2="1260" y2="748" class="cls-sep"/>
+  <text x="1030" y="768" class="cls-attr">(无成员变量)</text>
+  <line x1="1020" y1="778" x2="1260" y2="778" class="cls-sep"/>
+  <text x="1030" y="794" class="cls-method">+ populate(graph: Graph&amp;)</text>
+  <text x="1030" y="810" class="cls-attr" fill="#78909C">// 45栋建筑 + 40条道路</text>
+  <text x="1030" y="826" class="cls-attr" fill="#78909C">// 种子数据，首次启动加载</text>
+
+  <!-- ============ 模型层 ============ -->
+  <!-- Building -->
+  <rect x="1310" y="720" width="240" height="300" class="cls-box" rx="4"/>
+  <rect x="1310" y="720" width="240" height="28" fill="#6A1B9A" rx="4"/>
+  <rect x="1310" y="740" width="240" height="8" fill="#6A1B9A"/>
+  <text x="1430" y="739" class="cls-name" fill="white">Building</text>
+  <line x1="1310" y1="748" x2="1550" y2="748" class="cls-sep"/>
+  <text x="1320" y="764" class="cls-attr">- id_: int</text>
+  <text x="1320" y="780" class="cls-attr">- name_: QString</text>
+  <text x="1320" y="796" class="cls-attr">- x_: double</text>
+  <text x="1320" y="812" class="cls-attr">- y_: double</text>
+  <text x="1320" y="828" class="cls-attr">- type_: BuildingType</text>
+  <text x="1320" y="844" class="cls-attr">- info_: QString</text>
+  <text x="1320" y="860" class="cls-attr">- openHours_: QString</text>
+  <text x="1320" y="876" class="cls-attr">- floors_: int</text>
+  <text x="1320" y="892" class="cls-attr">- nodeKind_: int</text>
+  <line x1="1310" y1="900" x2="1550" y2="900" class="cls-sep"/>
+  <text x="1320" y="916" class="cls-method">+ id(): int</text>
+  <text x="1320" y="932" class="cls-method">+ name(): const QString&amp;</text>
+  <text x="1320" y="948" class="cls-method">+ x(): double / y(): double</text>
+  <text x="1320" y="964" class="cls-method">+ type(): BuildingType</text>
+  <text x="1320" y="980" class="cls-method">+ setInfo(info: QString)</text>
+  <text x="1320" y="996" class="cls-method">+ setPosition(x, y)</text>
+  <text x="1320" y="1012" class="cls-method">+ description(): QString</text>
+
+  <!-- Edge -->
+  <rect x="1580" y="720" width="200" height="180" class="cls-box" rx="4"/>
+  <rect x="1580" y="720" width="200" height="28" fill="#6A1B9A" rx="4"/>
+  <rect x="1580" y="740" width="200" height="8" fill="#6A1B9A"/>
+  <text x="1680" y="739" class="cls-name" fill="white">Edge «struct»</text>
+  <line x1="1580" y1="748" x2="1780" y2="748" class="cls-sep"/>
+  <text x="1590" y="764" class="cls-attr">+ to: int</text>
+  <text x="1590" y="780" class="cls-attr">+ weight: double</text>
+  <text x="1590" y="796" class="cls-attr">+ shelter: bool</text>
+  <text x="1590" y="812" class="cls-attr">+ tree: int</text>
+  <text x="1590" y="828" class="cls-attr">+ lake: bool</text>
+  <line x1="1580" y1="836" x2="1780" y2="836" class="cls-sep"/>
+  <text x="1590" y="852" class="cls-method">+ Edge(to, weight)</text>
+  <text x="1590" y="868" class="cls-method">+ Edge(to, w, shelter,</text>
+  <text x="1590" y="884" class="cls-method">       tree, lake)</text>
+
+  <!-- Graph -->
+  <rect x="1310" y="1060" width="470" height="300" class="cls-box" rx="4"/>
+  <rect x="1310" y="1060" width="470" height="28" fill="#6A1B9A" rx="4"/>
+  <rect x="1310" y="1080" width="470" height="8" fill="#6A1B9A"/>
+  <text x="1545" y="1079" class="cls-name" fill="white">Graph</text>
+  <line x1="1310" y1="1088" x2="1780" y2="1088" class="cls-sep"/>
+  <text x="1320" y="1104" class="cls-attr">- buildings_: unordered_map&lt;int, Building&gt;</text>
+  <text x="1320" y="1120" class="cls-attr">- adjacency_: unordered_map&lt;int, vector&lt;Edge&gt;&gt;</text>
+  <text x="1320" y="1136" class="cls-attr">- roadCount_: int</text>
+  <line x1="1310" y1="1144" x2="1780" y2="1144" class="cls-sep"/>
+  <text x="1320" y="1160" class="cls-method">+ addBuilding(b: Building)</text>
+  <text x="1320" y="1176" class="cls-method">+ getBuilding(id: int): const Building*</text>
+  <text x="1320" y="1192" class="cls-method">+ addRoad(from, to, distance)</text>
+  <text x="1320" y="1208" class="cls-method">+ addRoad(from, to, dist, shelter, tree, lake)</text>
+  <text x="1320" y="1224" class="cls-method">+ neighbors(id: int): const vector&lt;Edge&gt;&amp;</text>
+  <text x="1320" y="1240" class="cls-method">+ updatePosition(id, x, y)</text>
+  <text x="1320" y="1256" class="cls-method">+ dijkstra(start, end): vector&lt;int&gt;</text>
+  <text x="1320" y="1272" class="cls-method">+ dijkstraWithWeather(start, end, mode)</text>
+  <text x="1320" y="1288" class="cls-method">+ buildingCount(): int</text>
+  <text x="1320" y="1304" class="cls-method">+ roadCount(): int</text>
+
+  <!-- ============ 关系线 ============ -->
+  <!-- MainWindow → QMainWindow (继承) -->
+  <line x1="200" y1="200" x2="150" y2="135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- MapScene → QGraphicsScene (继承) -->
+  <line x1="530" y1="200" x2="390" y2="135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- BuildingItem → QGraphicsObject (继承) -->
+  <line x1="820" y1="200" x2="630" y2="135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- CharacterItem → QGraphicsObject (继承) -->
+  <path d="M 820 460 L 820 420 L 700 420 L 700 200 L 630 200 L 630 135" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- NpcItem → QGraphicsObject (继承) -->
+  <path d="M 1110 460 L 1110 430 L 700 430 L 700 200 L 630 200 L 630 135" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- AdminDialog → QDialog (继承) -->
+  <line x1="1335" y1="200" x2="860" y2="135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <!-- WeatherOverlay → QGraphicsItem (继承) -->
+  <line x1="1080" y1="200" x2="1070" y2="135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+
+  <!-- MainWindow → MapScene (组合) -->
+  <line x1="360" y1="280" x2="400" y2="280" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="380" y="275" class="rel-label">1</text>
+  <!-- MainWindow → Graph (组合) -->
+  <path d="M 360 340 L 380 340 L 380 1100 L 1310 1100" fill="none" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="370" y="335" class="rel-label">1</text>
+  <!-- MainWindow → CharacterItem (组合) -->
+  <path d="M 360 310 L 680 310 L 680 460 L 700 460" fill="none" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <!-- MainWindow → NpcItem (组合) -->
+  <path d="M 360 370 L 660 370 L 660 680 L 980 680 L 980 680" fill="none" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <!-- MainWindow → AdminDialog (关联) -->
+  <path d="M 320 520 L 320 690 L 1335 690 L 1335 400" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)" stroke-dasharray="0"/>
+
+  <!-- MapScene → BuildingItem (组合) -->
+  <line x1="660" y1="260" x2="700" y2="260" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="670" y="255" class="rel-label">0..*</text>
+  <!-- MapScene → RoadItem (组合) -->
+  <line x1="510" y1="440" x2="510" y2="480" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="515" y="465" class="rel-label">0..*</text>
+  <!-- MapScene → Graph (关联) -->
+  <path d="M 660 400 L 680 400 L 680 1060 L 1310 1060" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)"/>
+
+  <!-- Graph → Building (组合) -->
+  <line x1="1430" y1="1060" x2="1430" y2="1020" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="1435" y="1045" class="rel-label">0..*</text>
+  <!-- Graph → Edge (组合) -->
+  <line x1="1680" y1="1060" x2="1680" y2="900" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="1685" y="980" class="rel-label">0..*</text>
+
+  <!-- BuildingItem → Building (关联) -->
+  <path d="M 940 240 L 1180 240 L 1180 600 L 1430 600 L 1430 720" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)"/>
+  <text x="1200" y="235" class="rel-label">building</text>
+
+  <!-- NpcItem → Graph (关联) -->
+  <path d="M 1240 560 L 1280 560 L 1280 1130 L 1310 1130" fill="none" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)"/>
+  <text x="1285" y="555" class="rel-label">graph</text>
+
+  <!-- DatabaseManager → Building (关联) -->
+  <line x1="980" y1="800" x2="1310" y2="800" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)"/>
+  <text x="1100" y="795" class="rel-label">CRUD</text>
+
+  <!-- CampusData → Graph (依赖) -->
+  <path d="M 1140 840 L 1140 1060 L 1310 1060" fill="none" stroke="#78909C" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#depend)"/>
+  <text x="1145" y="950" class="rel-label">«uses»</text>
+
+  <!-- DatabaseManager → MainWindow (被使用) -->
+  <path d="M 840 720 L 840 660 L 200 660 L 200 520" fill="none" stroke="#78909C" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#depend)"/>
+
+  <!-- ============ 图例 ============ -->
+  <rect x="40" y="1080" width="400" height="200" class="legend-box" rx="6"/>
+  <text x="60" y="1105" font-size="13" font-weight="bold" fill="#37474F">图例 (UML 关系符号)</text>
+  <!-- 继承 -->
+  <line x1="60" y1="1135" x2="120" y2="1135" stroke="#37474F" stroke-width="1.5" marker-end="url(#inherit)"/>
+  <text x="140" y="1139" font-size="11" fill="#37474F">继承 (Inheritance) — 子类指向父类</text>
+  <!-- 组合 -->
+  <line x1="60" y1="1165" x2="120" y2="1165" stroke="#37474F" stroke-width="1.5" marker-start="url(#compose)"/>
+  <text x="140" y="1169" font-size="11" fill="#37474F">组合 (Composition) — 整体创建/销毁部分</text>
+  <!-- 聚合 -->
+  <line x1="60" y1="1195" x2="120" y2="1195" stroke="#37474F" stroke-width="1.5" marker-start="url(#aggregate)"/>
+  <text x="140" y="1199" font-size="11" fill="#37474F">聚合 (Aggregation) — 整体引用部分</text>
+  <!-- 关联 -->
+  <line x1="60" y1="1225" x2="120" y2="1225" stroke="#37474F" stroke-width="1.5" marker-end="url(#assoc)"/>
+  <text x="140" y="1229" font-size="11" fill="#37474F">关联 (Association) — 持有引用</text>
+  <!-- 依赖 -->
+  <line x1="60" y1="1255" x2="120" y2="1255" stroke="#78909C" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#depend)"/>
+  <text x="140" y="1259" font-size="11" fill="#37474F">依赖 (Dependency) — 临时使用</text>
+
+  <!-- 颜色说明 -->
+  <rect x="470" y="1080" width="420" height="200" class="legend-box" rx="6"/>
+  <text x="490" y="1105" font-size="13" font-weight="bold" fill="#37474F">分层颜色说明</text>
+  <rect x="490" y="1120" width="20" height="20" fill="#1565C0" rx="3"/>
+  <text x="520" y="1135" font-size="11" fill="#37474F">控制器 (MainWindow) — 负责UI布局与事件调度</text>
+  <rect x="490" y="1150" width="20" height="20" fill="#2E7D32" rx="3"/>
+  <text x="520" y="1165" font-size="11" fill="#37474F">视图层 (View) — 图元绘制与交互</text>
+  <rect x="490" y="1180" width="20" height="20" fill="#E65100" rx="3"/>
+  <text x="520" y="1195" font-size="11" fill="#37474F">数据层 (Data) — SQLite持久化与种子数据</text>
+  <rect x="490" y="1210" width="20" height="20" fill="#6A1B9A" rx="3"/>
+  <text x="520" y="1225" font-size="11" fill="#37474F">模型层 (Model) — 纯数据结构与算法</text>
+  <rect x="490" y="1240" width="20" height="20" fill="#E3F2FD" stroke="#1565C0" rx="3"/>
+  <text x="520" y="1255" font-size="11" fill="#37474F">Qt 基类 — 框架提供的父类</text>
+</svg>

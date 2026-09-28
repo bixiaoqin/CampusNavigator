@@ -1,0 +1,159 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Microsoft YaHei,SimHei,sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 20px; font-weight: bold; text-anchor: middle; fill: #263238; }
+      .box { fill: white; stroke: #546E7A; stroke-width: 1.5; rx: 6; }
+      .box-title { font-size: 14px; font-weight: bold; fill: #1565C0; }
+      .code { font-family: Consolas, monospace; font-size: 11px; fill: #37474F; }
+      .label { font-size: 12px; fill: #37474F; }
+      .arrow { stroke: #546E7A; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L9,5 L0,10 Z" fill="#546E7A"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="800" fill="#FAFAFA"/>
+  <text x="600" y="35" class="title">路网构建与数据存储方案</text>
+
+  <!-- 左侧：邻接表结构 -->
+  <rect x="40" y="60" width="360" height="340" class="box"/>
+  <text x="60" y="88" class="box-title">① 邻接表存储结构 (Graph类)</text>
+  <text x="60" y="110" class="code">unordered_map&lt;int, Building&gt; buildings_;</text>
+  <text x="60" y="125" class="code">unordered_map&lt;int, vector&lt;Edge&gt;&gt; adjacency_;</text>
+  <text x="60" y="150" class="label" fill="#78909C">内存中的图结构：</text>
+
+  <!-- 邻接表示意 -->
+  <rect x="60" y="165" width="80" height="25" fill="#E3F2FD" stroke="#1565C0" rx="4"/>
+  <text x="100" y="182" class="code" text-anchor="middle">id=0 北门</text>
+  <text x="145" y="182" class="code">→</text>
+  <rect x="160" y="165" width="90" height="25" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="205" y="182" class="code" text-anchor="middle">[7, 80.0]</text>
+  <text x="255" y="182" class="code">→ null</text>
+
+  <rect x="60" y="195" width="80" height="25" fill="#E3F2FD" stroke="#1565C0" rx="4"/>
+  <text x="100" y="212" class="code" text-anchor="middle">id=7 教1</text>
+  <text x="145" y="212" class="code">→</text>
+  <rect x="160" y="195" width="90" height="25" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="205" y="212" class="code" text-anchor="middle">[0, 80.0]</text>
+  <text x="255" y="212" class="code">→</text>
+  <rect x="270" y="195" width="90" height="25" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="315" y="212" class="code" text-anchor="middle">[8, 120.0]</text>
+
+  <rect x="60" y="225" width="80" height="25" fill="#E3F2FD" stroke="#1565C0" rx="4"/>
+  <text x="100" y="242" class="code" text-anchor="middle">id=5 图书馆</text>
+  <text x="145" y="242" class="code">→</text>
+  <rect x="160" y="225" width="90" height="25" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="205" y="242" class="code" text-anchor="middle">[4, 130.0]</text>
+  <text x="255" y="242" class="code">→</text>
+  <rect x="270" y="225" width="90" height="25" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="315" y="242" class="code" text-anchor="middle">[6, 130.0]</text>
+
+  <text x="60" y="280" class="label" fill="#78909C">每条边 Edge = {to, weight, shelter, tree, lake}</text>
+  <text x="60" y="300" class="label" fill="#78909C">• to: 目标建筑ID</text>
+  <text x="60" y="318" class="label" fill="#78909C">• weight: 距离(像素，由坐标计算)</text>
+  <text x="60" y="336" class="label" fill="#78909C">• shelter/tree/lake: 天气标签</text>
+  <text x="60" y="360" class="label" fill="#1565C0" font-weight="bold">空间复杂度: O(V + E)</text>
+  <text x="60" y="378" class="label" fill="#78909C">V=66节点, E=40×2=80有向边</text>
+
+  <!-- 中间：SQLite存储 -->
+  <rect x="430" y="60" width="360" height="340" class="box"/>
+  <text x="450" y="88" class="box-title">② SQLite 数据库持久化</text>
+  <text x="450" y="110" class="code">DatabaseManager «singleton»</text>
+  <text x="450" y="135" class="label" fill="#78909C">buildings 表：</text>
+  <rect x="450" y="145" width="320" height="90" fill="#F5F5F5" stroke="#BDBDBD" rx="4"/>
+  <text x="460" y="163" class="code">id | name | x | y | type | info | hours | floors | nodeKind</text>
+  <text x="460" y="180" class="code">0  | 北门 |640|50 |Gate  |学校北门|全天  |1      |1</text>
+  <text x="460" y="197" class="code">5  |图书馆|390|150|Lib   |藏书215万|07:30|5      |1</text>
+  <text x="460" y="214" class="code">42 |宿舍16|640|850|Dorm  |本科生公寓|全天 |6      |1</text>
+
+  <text x="450" y="255" class="label" fill="#78909C">roads 表：</text>
+  <rect x="450" y="265" width="320" height="70" fill="#F5F5F5" stroke="#BDBDBD" rx="4"/>
+  <text x="460" y="283" class="code">from_id | to_id | weight</text>
+  <text x="460" y="300" class="code">0       | 7     | 80.0</text>
+  <text x="460" y="317" class="code">5       | 6     | 130.0</text>
+
+  <text x="450" y="355" class="label" fill="#1565C0" font-weight="bold">首次启动：seedDefaultData() 自动建表+填种子数据</text>
+  <text x="450" y="375" class="label" fill="#78909C">管理员CRUD → 立即写回SQLite · 预处理语句防注入</text>
+
+  <!-- 右侧：种子数据 -->
+  <rect x="820" y="60" width="340" height="340" class="box"/>
+  <text x="840" y="88" class="box-title">③ 种子数据 (CampusData.cpp)</text>
+  <text x="840" y="115" class="code">void CampusData::populate(Graph&amp; g) {</text>
+  <text x="840" y="133" class="code">  // 45栋建筑 (id 0-44)</text>
+  <text x="840" y="151" class="code">  g.addBuilding({0,"北门",640,50,</text>
+  <text x="840" y="169" class="code">    Gate,"学校北门","全天",1});</text>
+  <text x="840" y="187" class="code">  g.addBuilding({5,"图书馆",390,150,</text>
+  <text x="840" y="205" class="code">    Library,"藏书215万册",...});</text>
+  <text x="840" y="230" class="code">  // 21个路口节点 (id 100-120)</text>
+  <text x="840" y="248" class="code">  // nodeKind=0, 不显示标签</text>
+  <text x="840" y="273" class="code">  // 40条道路</text>
+  <text x="840" y="291" class="code">  g.addRoad(0, 7, dist(640,50,</text>
+  <text x="840" y="309" class="code">    640,130), false,0,false);</text>
+  <text x="840" y="333" class="code">  g.addRoad(5, 6, dist(...),</text>
+  <text x="840" y="351" class="code">    true, 0, false); //有遮棚</text>
+  <text x="840" y="375" class="code">}</text>
+
+  <!-- 底部：数据流 -->
+  <rect x="40" y="430" width="1120" height="130" fill="white" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="60" y="458" class="box-title" fill="#2E7D32">数据加载流程</text>
+
+  <rect x="60" y="475" width="180" height="35" fill="#E3F2FD" stroke="#1565C0" rx="4"/>
+  <text x="150" y="497" class="label" text-anchor="middle">程序启动</text>
+  <line x1="240" y1="492" x2="290" y2="492" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="295" y="475" width="200" height="35" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="395" y="497" class="label" text-anchor="middle">DatabaseManager.init()</text>
+  <line x1="495" y1="492" x2="545" y2="492" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="550" y="475" width="200" height="35" fill="#E8F5E9" stroke="#4CAF50" rx="4"/>
+  <text x="650" y="497" class="label" text-anchor="middle">建表 + 检查是否为空</text>
+  <line x1="750" y1="492" x2="800" y2="492" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="805" y="475" width="180" height="35" fill="#F3E5F5" stroke="#9C27B0" rx="4"/>
+  <text x="895" y="497" class="label" text-anchor="middle">空则调 seedData()</text>
+  <line x1="895" y1="510" x2="895" y2="530" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="805" y="530" width="180" height="35" fill="#F3E5F5" stroke="#9C27B0" rx="4"/>
+  <text x="895" y="552" class="label" text-anchor="middle">CampusData::populate()</text>
+  <line x1="805" y1="547" x2="755" y2="547" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="550" y="530" width="200" height="35" fill="#E8F5E9" stroke="#4CAF50" rx="4"/>
+  <text x="650" y="552" class="label" text-anchor="middle">loadAll → Graph 邻接表</text>
+  <line x1="550" y1="547" x2="500" y2="547" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="295" y="530" width="200" height="35" fill="#FFF3E0" stroke="#FF9800" rx="4"/>
+  <text x="395" y="552" class="label" text-anchor="middle">MapScene.loadFromGraph()</text>
+  <line x1="295" y1="547" x2="245" y2="547" class="arrow" marker-end="url(#ar)"/>
+
+  <rect x="60" y="530" width="180" height="35" fill="#E3F2FD" stroke="#1565C0" rx="4"/>
+  <text x="150" y="552" class="label" text-anchor="middle">界面显示地图</text>
+
+  <!-- 路网布局说明 -->
+  <rect x="40" y="580" width="1120" height="190" fill="white" stroke="#BDBDBD" stroke-width="1" rx="8"/>
+  <text x="60" y="608" class="box-title">路网布局（基于 tjut_map.jpg 1280×976 真实底图）</text>
+
+  <rect x="60" y="625" width="340" height="130" fill="#F5F5F5" stroke="#BDBDBD" rx="4"/>
+  <text x="75" y="648" class="label" font-weight="bold" fill="#37474F">建筑布局（6排网格）：</text>
+  <text x="75" y="668" class="label" fill="#546E7A">• 第1排 y≈130：教学楼群（8栋）</text>
+  <text x="75" y="688" class="label" fill="#546E7A">• 第2排 y≈250：学院群（4栋）</text>
+  <text x="75" y="708" class="label" fill="#546E7A">• 第3排 y≈380：学院群（7栋）</text>
+  <text x="75" y="728" class="label" fill="#546E7A">• 第4排 y≈500：文科学院（4栋）</text>
+  <text x="75" y="748" class="label" fill="#546E7A">• 宿舍区 y≈820-850（6栋）</text>
+
+  <rect x="420" y="625" width="340" height="130" fill="#F5F5F5" stroke="#BDBDBD" rx="4"/>
+  <text x="435" y="648" class="label" font-weight="bold" fill="#37474F">道路设计：</text>
+  <text x="435" y="668" class="label" fill="#546E7A">• 大成路：x≈640 南北主干道</text>
+  <text x="435" y="688" class="label" fill="#546E7A">• 知行道：y≈850 东西主干道</text>
+  <text x="435" y="708" class="label" fill="#546E7A">• 横向道路：y=440, y=660</text>
+  <text x="435" y="728" class="label" fill="#546E7A">• 21个路口节点(id 100-120)</text>
+  <text x="435" y="748" class="label" fill="#546E7A">• 距离由坐标欧氏距离计算</text>
+
+  <rect x="780" y="625" width="360" height="130" fill="#F5F5F5" stroke="#BDBDBD" rx="4"/>
+  <text x="795" y="648" class="label" font-weight="bold" fill="#37474F">天气标签（创新功能）：</text>
+  <text x="795" y="668" class="label" fill="#546E7A">• shelter=true：有连廊遮雨棚</text>
+  <text x="795" y="688" class="label" fill="#546E7A">• tree=0-3：树荫等级</text>
+  <text x="795" y="708" class="label" fill="#546E7A">• lake=true：临湖大风区</text>
+  <text x="795" y="728" class="label" fill="#546E7A">→ dijkstraWithWeather() 根据</text>
+  <text x="795" y="748" class="label" fill="#546E7A">  天气模式动态调整边权重</text>
+</svg>

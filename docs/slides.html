@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园探索与智能导航模拟系统 — 答辩PPT</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#f5f5f5; font-family: "Microsoft YaHei","PingFang SC",sans-serif; overflow:hidden; }
+  .slide-container { width:100vw; height:100vh; position:relative; overflow:hidden; }
+  .slide {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    display:none; flex-direction:column; justify-content:center; align-items:center;
+    padding:60px 80px; background:white;
+  }
+  .slide.active { display:flex; }
+
+  /* Title slide */
+  .slide-title { text-align:center; }
+  .slide-title h1 { font-size:42px; color:#1a237e; margin-bottom:16px; letter-spacing:2px; }
+  .slide-title h2 { font-size:24px; color:#3949ab; margin-bottom:40px; font-weight:400; }
+  .slide-title .meta { font-size:16px; color:#666; line-height:2.4; }
+  .slide-title .divider { width:120px; height:3px; background:linear-gradient(90deg,#1a237e,#7c4dff); margin:30px auto; border-radius:2px; }
+
+  /* Content slides */
+  .slide h2 { font-size:32px; color:#1a237e; margin-bottom:32px; padding-bottom:12px; border-bottom:3px solid #7c4dff; }
+  .slide h3 { font-size:22px; color:#303f9f; margin:20px 0 12px; }
+  .content-box { max-width:1100px; width:100%; }
+  .two-col { display:flex; gap:48px; width:100%; max-width:1100px; }
+  .col { flex:1; }
+  p, li { font-size:17px; line-height:1.8; color:#333; }
+  ul { list-style:none; padding-left:0; }
+  ul li { position:relative; padding-left:24px; margin-bottom:8px; }
+  ul li::before { content:"▸"; position:absolute; left:0; color:#7c4dff; font-weight:bold; }
+
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; }
+  th { background:#1a237e; color:white; padding:10px 14px; text-align:left; }
+  td { padding:9px 14px; border-bottom:1px solid #eee; }
+  tr:hover td { background:#f0ecff; }
+
+  .highlight { background:#e8eaf6; padding:20px 28px; border-radius:10px; border-left:5px solid #7c4dff; margin:16px 0; }
+  .tag { display:inline-block; background:#7c4dff; color:white; font-size:13px; padding:3px 10px; border-radius:12px; margin:2px; }
+  .tag.green { background:#43a047; }
+  .tag.orange { background:#ef6c00; }
+  .tag.red { background:#e53935; }
+  .code-block { background:#263238; color:#aed581; padding:18px 22px; border-radius:8px; font-family:"Consolas","Courier New",monospace; font-size:14px; line-height:1.7; overflow-x:auto; white-space:pre; margin:12px 0; }
+
+  /* Navigation */
+  .nav-bar { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:12px; z-index:999; background:rgba(255,255,255,0.92); padding:10px 24px; border-radius:30px; box-shadow:0 4px 20px rgba(0,0,0,0.12); }
+  .nav-btn { border:1px solid #ddd; background:white; padding:8px 18px; border-radius:20px; cursor:pointer; font-size:14px; color:#555; transition:all .2s; }
+  .nav-btn:hover { background:#7c4dff; color:white; border-color:#7c4dff; }
+  .page-num { display:flex; align-items:center; padding:0 12px; font-size:14px; color:#888; }
+
+  .diagram { background:#fafafa; border:1px solid #e0e0e0; border-radius:10px; padding:20px; text-align:center; font-size:15px; line-height:2; margin:16px 0; }
+
+  .big-number { font-size:56px; font-weight:bold; color:#7c4dff; }
+</style>
+</head>
+<body>
+
+<div class="slide-container">
+
+<!-- ===== Slide 1: 封面 ===== -->
+<div class="slide active" id="s1">
+  <div class="slide-title">
+    <h1>校园探索与智能导航模拟系统</h1>
+    <h2>Campus Explorer & Intelligent Navigation Simulator</h2>
+    <div class="divider"></div>
+    <div class="meta">
+      《C++程序设计》课程设计答辩<br><br>
+      题目：题目5 校园导航系统（Qt路线，★★★☆☆）<br>
+      姓名：_______________ &nbsp;&nbsp; 学号：_______________<br>
+      班级：_______________ &nbsp;&nbsp; 指导教师：_______________<br><br>
+      2026年6月
+    </div>
+  </div>
+</div>
+
+<!-- ===== Slide 2: 目录 ===== -->
+<div class="slide" id="s2">
+  <div class="content-box"><h2>汇报提纲</h2>
+  <div class="two-col">
+    <div class="col">
+      <ul>
+        <li>一、项目背景与目标</li>
+        <li>二、技术选型与架构设计</li>
+        <li>三、核心功能实现</li>
+        <li>四、Dijkstra 算法详解</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <li>五、2.5D 渲染技术创新</li>
+        <li>六、扩展功能展示</li>
+        <li>七、测试与运行结果</li>
+        <li>八、总结与收获</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 3: 项目背景 ===== -->
+<div class="slide" id="s3">
+  <div class="content-box"><h2>一、项目背景与目标</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>为什么做这个？</h3>
+      <ul>
+        <li>高校校园规模扩大 → 新生/访客容易迷路</li>
+        <li>传统静态地图无法提供路径规划服务</li>
+        <li>《C++程序设计》课程综合性实践要求</li>
+        <li>覆盖 OOP / STL / 图论 / GUI / 数据库 多大知识点</li>
+      </ul>
+      <div class="highlight" style="margin-top:20px;">
+        <strong>任务书评分标准：</strong><br>
+        基础功能 60% + 扩展功能 25% + 创新 15%
+      </div>
+    </div>
+    <div class="col">
+      <h3>目标达成情况</h3>
+      <table>
+        <tr><th>类别</th><th>要求</th><th>完成</th></tr>
+        <tr><td>基础</td><td>地图+路径+漫游+数据库</td><td><span class="tag green">6项全部✓</span></td></tr>
+        <tr><td>扩展</td><td>三星需≥3项扩展</td><td><span class="tag green">3项全部✓</span></td></tr>
+        <tr><td>创新</td><td>特色亮点</td><td><span class="tag orange">2.5D+粒子+动画</span></td></tr>
+        <tr><td>规范</td><td>注释率≥20%</td><td><span class="tag green">达标 ✓</span></td></tr>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 4: 技术选型 ===== -->
+<div class="slide" id="s4">
+  <div class="content-box"><h2>二、技术选型与架构设计</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>技术栈</h3>
+      <table>
+        <tr><th>层次</th><th>选择</th><th>理由</th></tr>
+        <tr><td>语言</td><td>C++17</td><td>课程要求，现代特性丰富</td></tr>
+        <tr><td>GUI框架</td><td>Qt 6.7 LTS</td><td>Graphics View强大，文档完善</td></tr>
+        <tr><td>构建</td><td>CMake + MinGW</td><td>跨平台，Qt原生支持</td></tr>
+        <tr><td>数据库</td><td>SQLite (Qt Sql)</td><td>轻量零配置，单文件存储</td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <h3>为什么选 Qt 而非其他？</h3>
+      <ul>
+        <li>Graphics View Framework 完美适配地图场景</li>
+        <li>信号槽机制实现松耦合事件通信</li>
+        <li>QGraphicsItem::paint() 完全自定义绘制</li>
+        <li>LTS 长期支持，稳定可靠</li>
+      </ul>
+      <div class="diagram" style="margin-top:16px;">
+        <b>三层架构：</b><br>
+        View（视图）→ Model（模型）→ Data（数据）<br>
+        上层依赖下层 · 下层不依赖上层
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 5: 架构图 ===== -->
+<div class="slide" id="s5">
+  <div class="content-box"><h2>系统架构总览</h2>
+  <div class="diagram" style="font-size:16px; line-height:2.2;">
+    <table style="max-width:800px;margin:auto;">
+      <tr style="background:#e8eaf6;"><td colspan="3"><strong>🖥 视图层 View</strong> — 所有 GUI 组件</td></tr>
+      <tr><td>MainWindow 主窗口</td><td>MapScene 地图场景</td><td>BuildingItem/RoadItem/CharacterItem 自定义图元</td></tr>
+      <tr><td>WeatherOverlay 天气粒子</td><td>AdminDialog 管理对话框</td><td></td></tr>
+      <tr style="background:#fff3e0;"><td colspan="3"><strong>⚙ 模型层 Model</strong> — 纯 C++ 数据结构，零 GUI 依赖</td></tr>
+      <tr><td>Building 建筑实体</td><td>Edge 道路边</td><td>Graph 路网图 + Dijkstra</td></tr>
+      <tr style="background:#e8f5e9;"><td colspan="3"><strong>💾 数据层 Data</strong> — 种子数据 + 数据库持久化</td></tr>
+      <tr><td>CampusData 16建筑+20道路</td><td colspan="2">DatabaseManager 单例 SQLite CRUD</td></tr>
+    </table>
+  </div>
+  <p style="text-align:center;color:#888;margin-top:12px;font-size:14px;">共 15 个头文件 + 15 个源文件 ≈ 3000 行代码</p>
+  </div>
+</div>
+
+<!-- ===== Slide 6: 核心功能-地图 ===== -->
+<div class="slide" id="s6">
+  <div class="content-box"><h2>三、核心功能① 地图可视化</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>数据基础</h3>
+      <ul>
+        <li><b>16 栋建筑</b ≥ 要求的 15 栋</li>
+        <li><b>20 条道路</b>构成连通路网</li>
+        <li>11 种建筑类型，不同颜色区分</li>
+        <li>坐标使用 2.5D 斜投影视角像素值</li>
+      </ul>
+      <h3 style="margin-top:16px;">渲染方式</h3>
+      <ul>
+        <li>Qt Graphics View Framework</li>
+        <li>自定义 QGraphicsItem 子类</li>
+        <li>paint() 中完全自主绘制</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>建筑类型与颜色映射</h3>
+      <table style="font-size:14px;">
+        <tr><th>类型</th><th>颜色</th><th>示例</th></tr>
+        <tr><td>校门 Gate</td><td>矢车菊蓝</td><td>正门</td></tr>
+        <tr><td>教学楼 Classroom</td><td>浅绿</td><td>第一/二教学楼</td></tr>
+        <tr><td>图书馆 Library</td><td>浅粉红</td><td>图书馆</td></tr>
+        <tr><td>实验室 Lab</td><td>浅蓝</td><td>实验楼</td></tr>
+        <tr><td>宿舍 Dormitory</td><td>桃色</td><td>1/2/3号楼</td></tr>
+        <tr><td>食堂 Canteen</td><td>浅珊瑚</td><td>第一/二食堂</td></tr>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 7: 核心功能-Dijkstra ===== -->
+<div class="slide" id="s7">
+  <div class="content-box"><h2>三、核心功能② Dijkstra 最短路径</h2>
+  <div class="code-block">// Graph::dijkstra() 核心算法
+std::vector&lt;int&gt; Graph::dijkstra(int startId, int endId) const {
+    // 初始化
+    unordered_map&lt;int,double&gt; dist;   // 距离表
+    unordered_map&lt;int,int&gt; prev;     // 前驱表
+    priority_queue&lt;Node,vector&lt;Node&gt;,greater&lt;&gt;&gt; pq; // 最小堆
+
+    dist[startId] = 0;
+    pq.push({0.0, startId});
+
+    while (!pq.empty()) {
+        auto [d, u] = pq.top(); pq.pop();
+        if (visited[u]) continue;       // 去重
+        if (u == endId) break;          // ★ 提前终止
+
+        for (const Edge&amp; e : neighbors(u)) {  // 松弛操作
+            double nd = d + e.weight;
+            if (nd &lt; dist[e.to]) {
+                dist[e.to] = nd;
+                prev[e.to] = u;
+                pq.push({nd, e.to});
+            }
+        }
+    }
+    // 回溯路径并返回...
+}</div>
+  <div class="two-col" style="margin-top:16px;">
+    <div class="col">
+      <p><b>时间复杂度：</b>O((V+E)logV)</p>
+      <p><b>V=16, E=20 时：</b>&lt; 0.1ms 瞬时响应</p>
+    </div>
+    <div class="col">
+      <p><b>存储结构：</b>邻接表（unordered_map + vector）</p>
+      <p><b>优化：</b>提前终止 + visited去重</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 8: 核心功能-角色+导航 ===== -->
+<div class="slide" id="s8">
+  <div class="content-box"><h2>三、核心功能③ 角色漫游 & 自动导航</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>手动漫游</h3>
+      <ul>
+        <li>WASD / 方向键 控制角色移动</li>
+        <li>30FPS moveTimer 定时器驱动</li>
+        <li>keyPressEvent 记录按键状态</li>
+        <li>每帧根据状态累加位移</li>
+      </ul>
+      <div class="highlight">
+        角色外观：红圆点 + 白色方向箭头<br>
+        Z=10 保证在所有元素最上层
+      </div>
+    </div>
+    <div class="col">
+      <h3>自动导航动画</h3>
+      <ul>
+        <li>Dijkstra 计算出路径后启动 navTimer</li>
+        <li>沿路径逐段线性插值移动</li>
+        <li>速度：默认 120 像素/秒</li>
+        <li>到达终点自动停止并提示</li>
+        <li>★ 导航中按 WASD 可随时中断接管</li>
+      </ul>
+      <div class="diagram" style="font-size:13px;">
+        三定时器协作：<br>
+        moveTimer_(手动33ms) ↔ navTimer_(自动33ms) 互斥<br>
+        auxTimer_(辅助100ms) 独立更新迷你地图
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 9: 2.5D 渲染创新 ★ ===== -->
+<div class="slide" id="s9">
+  <div class="content-box"><h2>四、2.5D 斜投影渲染 ★ 技术创新</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>传统做法 vs 本项目</h3>
+      <table style="font-size:14px;">
+        <tr><th>方案</th><th>效果</th><th>技术难度</th></tr>
+        <tr><td>2D 扁平矩形</td><td>普通</td><td>低</td></tr>
+        <tr><td><b>本项目：2.5D 斜投影</b></td><td>立体盒子</td><td>中</td></tr>
+        <tr><td>真 3D (OpenGL)</td><td>完全立体</td><td>极高</td></tr>
+      </table>
+      <h3 style="margin-top:16px;">核心原理</h3>
+      <ul>
+        <li>同一建筑色派生<strong>三档明度</strong></li>
+        <li>屋顶（原色最亮）→ 右墙(darker 120) → 前墙(darker 150)</li>
+        <li>模拟左上方光源产生立体感</li>
+        <li>地面半透明阴影增强空间感</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="diagram" style="line-height:1.6; font-size:14px;">
+        <b>坐标示意：</b><br>
+        ┌─────────────────┐<br>
+        │ (0,0) 屋顶(W×H) │ W=100 H=60<br>
+        │   ╲ 前墙        │ S=10 D=16<br>
+        │    ╲            │<br>
+        │     ╲ 右墙      │<br>
+        │  (S,H+D)───────┘<br>
+        └─────────────────┘<br><br>
+        绘制顺序：<br>
+        ①地面投影 → ②右墙 → ③前墙 → ④屋顶<br>
+        （从后往前，Painter's Algorithm）
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 10: 数据库 ===== -->
+<div class="slide" id="s10">
+  <div class="content-box"><h2>核心功能④ SQLite 数据库管理</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>设计模式：单例模式 Singleton</h3>
+      <ul>
+        <li>全程只需一个数据库连接</li>
+        <li>SQLite 是文件型数据库</li>
+        <li>多连接反而有问题</li>
+        <li>DatabaseManager::instance()</li>
+      </ul>
+      <h3 style="margin-top:16px;">SQL 注入防护</h3>
+      <ul>
+        <li>所有操作使用 prepare() 预处理语句</li>
+        <li>bindValue() 参数绑定</li>
+        <li>Qt 自动转义特殊字符</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>CRUD 四大操作</h3>
+      <table style="font-size:14px;">
+        <tr><th>操作</th><th>方法</th></tr>
+        <tr><td>Create 新增</td><td>addBuilding()</td></tr>
+        <tr><td>Read 读取</td><td>loadAllBuildings()</td></tr>
+        <tr><td>Update 更新</td><td>updateBuilding()</td></tr>
+        <tr><td>Delete 删除</td><td>deleteBuilding()</td></tr>
+      </table>
+      <div class="highlight" style="margin-top:12px;font-size:14px;">
+        AdminDialog 提供图形化界面：<br>
+        左侧列表选建筑 → 右侧表单编辑 → 新增/修改/删除按钮<br>
+        删除有二次确认对话框防止误操作
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 11: 扩展功能 ===== -->
+<div class="slide" id="s11">
+  <div class="content-box"><h2>五、三大扩展功能（三星要求）</h2>
+  <div style="display:flex;gap:24px;margin-top:16px;">
+    <div style="flex:1;background:#e3f2fd;padding:20px;border-radius:10px;text-align:center;">
+      <div class="big-number">🌙</div>
+      <h3>昼夜模式切换</h3>
+      <p style="font-size:14px;">白天：AliceBlue 浅蓝背景<br>夜间：深蓝夜空 + 星星点缀<br>一键切换，全局联动</p>
+    </div>
+    <div style="flex:1;background:#fce4ec;padding:20px;border-radius:10px;text-align:center;">
+      <div class="big-number">🌧️</div>
+      <h3>天气粒子系统</h3>
+      <p style="font-size:14px;">雨：150条蓝色短线快速下落<br>雪：80个白色圆点缓慢飘摆<br>QRandomGenerator 随机驱动</p>
+    </div>
+    <div style="flex:1;background:#e8f5e9;padding:20px;border-radius:10px;text-align:center;">
+      <div class="big-number">🗺️</div>
+      <h3>实时迷你地图</h3>
+      <p style="font-size:14px;">右上角缩小版地图预览<br>红点标记玩家当前位置<br>10FPS 辅助定时器刷新</p>
+    </div>
+  </div>
+  <div class="highlight" style="margin-top:20px;text-align:center;">
+    三项扩展均基于 Qt Graphics View 原生能力实现，无第三方依赖
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 12: 运行效果 ===== -->
+<div class="slide" id="s12">
+  <div class="content-box"><h2>六、运行效果展示</h2>
+  <div class="diagram" style="font-size:16px;line-height:2;">
+    <b>演示要点（视频/现场演示）：</b><br><br>
+    ① 启动程序 → 16栋2.5D立体建筑 + 20条道路清晰可见<br>
+    ② 鼠标悬停建筑 → 颜色变亮（交互反馈）<br>
+    ③ 点击两栋建筑 → 选定起点/终点 → 点"开始导航"<br>
+    ④ 橙色高亮路径出现 → 显示途经建筑和总距离<br>
+    ⑤ 角色自动沿路径平滑移动到终点<br><br>
+    <b>然后依次演示：</b><br>
+    ⑥ WASD 手动控制角色漫游<br>
+    ⑦ "切换白天/夜间" → 星空背景<br>
+    ⑧ "天气"按钮 → 雨/雪粒子特效<br>
+    ⑨ "管理员模式" → 新增/修改/删除建筑
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 13: 问题解决 ===== -->
+<div class="slide" id="s13">
+  <div class="content-box"><h2>七、开发中遇到的问题与解决</h2>
+  <table style="font-size:14px;">
+    <tr><th>#</th><th>问题</th><th>原因</th><th>解决方案</th></tr>
+    <tr><td>1</td><td>Windows控制台中文乱码</td><td>MinGW编码不一致</td><td>升级为GUI程序，绕开问题</td></tr>
+    <tr><td>2</td><td>邻接表未初始化异常</td><td>漏写try_emplace</td><td>补全初始化代码</td></tr>
+    <tr><td>3</td><td>12个编译缺头文件错误</td><td>缺少#include</td><td>逐一补齐</td></tr>
+    <tr><td>4</td><td>PImpl惯用法编译失败</td><td>MinGW看不到完整定义</td><td>放弃PImpl，直接include</td></tr>
+    <tr><td>5</td><td>fitInView首次无效</td><td>窗口未show视口为0</td><td>重写showEvent延迟调用</td></tr>
+    <tr><td>6</td><td>QRandomGenerator歧义</td><td>Qt 6.1.1 MinGW多重载</td><td>改用generateDouble()*范围</td></tr>
+  </table>
+  <div class="highlight" style="margin-top:16px;">
+    <strong>体会：</strong>每个bug都是学习机会。调试过程中深入理解了Qt的编译机制、Graphics View的生命周期、C++模板重载解析规则等知识。
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 14: 总结 ===== -->
+<div class="slide" id="s14">
+  <div class="content-box"><h2>八、总结与收获</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>成果量化</h3>
+      <table>
+        <tr><td>代码量</td><td>~3000 行 C++17</td></tr>
+        <tr><td>源文件</td><td>.h × 15 + .cpp × 15</td></tr>
+        <tr><td>功能测试</td><td>20/20 全部通过 ✅</td></tr>
+        <tr><td>注释覆盖率</td><td>> 20% ✅</td></tr>
+        <tr><td>可执行文件大小</td><td>~2.8 MB (Release)</td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <h3>核心收获</h3>
+      <ul>
+        <li>C++17 现代特性的工程化应用</li>
+        <li>Qt Graphics View 自定义绘图体系</li>
+        <li>Dijkstra 从理论到实现的转化</li>
+        <li>分层架构的设计思想</li>
+        <li>软件工程的完整开发流程</li>
+        <li>Debug 的耐心与方法论</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ===== Slide 15: 致谢 ===== -->
+<div class="slide" id="s15">
+  <div class="slide-title">
+    <h1>感谢聆听！</h1>
+    <div class="divider"></div>
+    <div class="meta" style="font-size:20px;">
+      欢迎提问与交流<br><br>
+      <span style="font-size:16px;color:#999;">
+        项目仓库：CampusNavigator/<br>
+        技术：C++17 + Qt 6.7 + CMake + SQLite + Graphics View
+      </span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end slide-container -->
+
+<!-- Navigation bar -->
+<div class="nav-bar">
+  <button class="nav-btn" onclick="goSlide(-1)">◀ 上页</button>
+  <span class="page-num"><span id="currentPg">1</span> / <span id="totalPg">15</span></span>
+  <button class="nav-btn" onclick="goSlide(1)">下页 ▶</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let cur = 0;
+const total = slides.length;
+
+function showSlide(n) {
+  slides.forEach(s => s.classList.remove('active'));
+  cur = Math.max(0, Math.min(total - 1, n));
+  slides[cur].classList.add('active');
+  document.getElementById('currentPg').textContent = cur + 1;
+}
+
+function goSlide(delta) { showSlide(cur + delta); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') goSlide(1);
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') goSlide(-1);
+  else if (e.key === 'Home') showSlide(0);
+  else if (e.key === 'End') showSlide(total - 1);
+});
+
+// Touch swipe support
+let tx = 0;
+document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const diff = tx - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) goSlide(diff > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
